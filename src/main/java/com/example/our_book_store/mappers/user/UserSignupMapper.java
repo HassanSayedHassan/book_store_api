@@ -1,5 +1,6 @@
-package com.example.our_book_store.mappers;
+package com.example.our_book_store.mappers.user;
 
+import com.example.our_book_store.mappers.Mapper;
 import com.example.our_book_store.models.User;
 import com.example.our_book_store.models.dto.UserSignUpDto;
 import lombok.AllArgsConstructor;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
 @Component
-public class UserSignupMapper implements Mapper<UserSignUpDto, User>{
+public class UserSignupMapper implements Mapper<UserSignUpDto, User> {
     private final ModelMapper modelMapper;
 
     @Override

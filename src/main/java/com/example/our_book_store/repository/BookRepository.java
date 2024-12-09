@@ -1,8 +1,8 @@
 package com.example.our_book_store.repository;
 
-import com.example.our_book_store.models.Cart;
+import com.example.our_book_store.models.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BookRepository extends JpaRepository<Cart, Long> {
+public interface BookRepository extends JpaRepository<Book, Long> {
 
 }

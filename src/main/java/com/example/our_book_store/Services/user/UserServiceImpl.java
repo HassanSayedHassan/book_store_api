@@ -1,8 +1,8 @@
-package com.example.our_book_store.Services;
+package com.example.our_book_store.Services.user;
 
 import com.example.our_book_store.exceptions.ResourceNotFoundException;
-import com.example.our_book_store.mappers.UserResponseMapper;
-import com.example.our_book_store.mappers.UserSignupMapper;
+import com.example.our_book_store.mappers.user.UserResponseMapper;
+import com.example.our_book_store.mappers.user.UserSignupMapper;
 import com.example.our_book_store.models.User;
 import com.example.our_book_store.models.dto.UserLoginDto;
 import com.example.our_book_store.models.dto.UserResponseDto;
@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
     private final UserRepository userRepository;
     private final UserSignupMapper userSignupMapper;
     private final UserResponseMapper userResponseMapper;
