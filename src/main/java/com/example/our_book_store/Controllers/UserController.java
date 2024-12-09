@@ -8,6 +8,7 @@ import com.example.our_book_store.models.dto.UserResponseDto;
 import com.example.our_book_store.models.dto.UserSignUpDto;
 import com.example.our_book_store.responces.ApiResponse;
 import com.example.our_book_store.responces.PaginatedApiResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import java.util.List;
 
@@ -21,25 +22,15 @@ public class UserController {
     private final UserService userServices;
 
     @PostMapping("signup")
-    public ResponseEntity<ApiResponse> signUp(@RequestBody  UserSignUpDto userSignUpDto) {
-        try {
+    public ResponseEntity<ApiResponse> signUp(@Valid @RequestBody  UserSignUpDto userSignUpDto) {
             UserResponseDto userResponseDto=userServices.signUp(userSignUpDto);
             return ResponseEntity.ok().body(new ApiResponse("User created successfully",userResponseDto));
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ApiResponse(e.getMessage(),null));
-        }
     }
 
     @PostMapping("login")
     public ResponseEntity<ApiResponse> login(@RequestBody UserLoginDto userLoginDto) {
-        try {
             UserResponseDto userResponseDto=userServices.login(userLoginDto);
             return ResponseEntity.ok().body(new ApiResponse("User logged in successfully",userResponseDto));
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ApiResponse(e.getMessage(),null));
-        }
     }
 
     @GetMapping()
@@ -47,13 +38,9 @@ public class UserController {
             @RequestParam(defaultValue = "10") int limit,
             @RequestParam(defaultValue = "0") int offset
     ) {
-        try {
             var response= userServices.getAllUsers(limit,offset);
             return ResponseEntity.ok().body(response);
-        }
-        catch (Exception e) {
-            return ResponseEntity.badRequest().body(new PaginatedApiResponse<>(e.getMessage(),null,0,0));
-        }
+
     }
 
 }

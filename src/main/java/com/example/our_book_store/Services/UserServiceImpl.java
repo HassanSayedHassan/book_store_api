@@ -1,5 +1,6 @@
 package com.example.our_book_store.Services;
 
+import com.example.our_book_store.exceptions.ResourceNotFoundException;
 import com.example.our_book_store.mappers.UserResponseMapper;
 import com.example.our_book_store.mappers.UserSignupMapper;
 import com.example.our_book_store.models.User;
@@ -25,6 +26,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto signUp(UserSignUpDto userSignUpDto) {
+        if (userRepository.findByUserName(userSignUpDto.getUserName()).isPresent()) {
+            throw new IllegalArgumentException("Username is already taken");
+        }
+
+        // Validate if the email is unique
+        if (userRepository.findByEmail(userSignUpDto.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Email is already taken");
+        }
         User user = userSignupMapper.toEntity(userSignUpDto);
         user.setId(user.getEmail()); // special case from requirements
         userRepository.save(user);
@@ -34,7 +43,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto login(UserLoginDto userLoginDto) {
         Optional<User> user = userRepository.findByEmailAndPassword(userLoginDto.getEmail(), userLoginDto.getPassword());
-        if (user.isEmpty()) throw new RuntimeException("User not found");
+        if (user.isEmpty()) throw new ResourceNotFoundException("User not found");
         return userResponseMapper.toDto(user.get());
     }
 
