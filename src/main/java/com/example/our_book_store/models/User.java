@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 @Builder
 @Data
 @Entity
@@ -31,4 +33,11 @@ public class User {
     private String address;
 
     private String role;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+//
+//    @OneToMany
+//    List<Order> orders = new ArrayList<>();
 }
