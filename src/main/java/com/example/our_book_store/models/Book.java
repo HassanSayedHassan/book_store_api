@@ -30,6 +30,7 @@ public class Book {
     private String title;
 
 
+
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(
         name = "book_review",

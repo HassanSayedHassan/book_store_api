@@ -37,7 +37,7 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
     private Cart cart;
-//
-//    @OneToMany
-//    List<Order> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Order> orders = new ArrayList<>();
 }
